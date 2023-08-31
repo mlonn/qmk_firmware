@@ -40,36 +40,40 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define A_S LALT_T(SE_S)
 #define S_D LSFT_T(SE_D)
 #define G_F LGUI_T(SE_F)
-#define S_V LT(SYM,SE_V)
+#define M_V MT(MOD_RCTL | MOD_RALT, SE_V)
 #define H_G HYPR_T(SE_G)
 
 #define G_J  RGUI_T(SE_J)
 #define S_K  RSFT_T(SE_K)
 #define A_L  RALT_T(SE_L)
+#define M_M MT(MOD_LCTL | MOD_LALT, SE_M)
 #define C_OE RCTL_T(SE_ODIA)
 #define H_H HYPR_T(SE_H)
 
-#define S_ENT LT(SYM_R,KC_ENT)
-#define S_SPC LT(SYM_L,KC_SPC)
-#define M_TAB LT(MAG,KC_TAB)
-#define N_ESC LT(NUM,KC_ESC)
-#define ___X___ KC_NO
-
-#define U_RDO SCMD(KC_Z)
+#define U_RDO LSFT(LCMD(KC_Z))
 #define U_PST LCMD(KC_V)
 #define U_CPY LCMD(KC_C)
 #define U_CUT LCMD(KC_X)
 #define U_UND LCMD(KC_Z)
 
+#define S_ENT LT(SYM_R,KC_ENT)
+#define S_SPC LT(SYM_L,KC_SPC)
+#define N_TAB LT(NAV,KC_TAB)
+#define N_ESC LT(NUM,KC_ESC)
+#define M_B LT(MOUSE,SE_B)
+
+
+#define ___X___ KC_NO
+
+
 enum layers {
     QWERTY,
-    GAME,
+    MOUSE,
     G_N,
     SYM_L,
     SYM_R,
     NUM,
     NAV,
-    MAG,
 };
 
 enum custom_keycodes {
@@ -79,19 +83,19 @@ enum custom_keycodes {
     QUOT,
     ANSIBSLS,
     M_ARROW,
-    CMD_TAB
 };
+
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [QWERTY] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-        N_ESC , SE_Q   , SE_W   , SE_E   , SE_R   , SE_T ,                      SE_Y   , SE_U   , SE_I   , SE_O   , SE_P   , SE_ARNG,
+        ___X___ , SE_Q   , SE_W   , SE_E   , SE_R   , SE_T ,                      SE_Y   , SE_U   , SE_I   , SE_O   , SE_P   , SE_ARNG,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-        TG(GAME), C_A    , A_S    , S_D    , G_F    , H_G ,                      H_H    , G_J    , S_K    , A_L    , C_OE   , SE_ADIA,
+      ___X___, C_A    , A_S    , S_D    , G_F    , H_G ,                      H_H    , G_J    , S_K    , A_L    , C_OE   , SE_ADIA,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      ___X___, SE_Z   , SE_X   , SE_C   , SE_V    , SE_B,                         SE_N   , SE_M    , COM    , DOT    , SLSH   , QUOT   ,
+        ___X___, SE_Z   , SE_X   , SE_C   , M_V    , M_B,                    SE_N   , M_M    , COM    , DOT    , SLSH   , QUOT   ,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                       MO(NAV),M_TAB   ,S_ENT,       S_SPC, KC_BSPC,  MO(G_N)
+                                        N_ESC, N_TAB ,S_ENT,       S_SPC, KC_BSPC,  MO(G_N)
                                       //`--------------------------'  `-------------------------
   ),
 
@@ -101,7 +105,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
             ___X___,    SE_1,    SE_2,    SE_3,    SE_4,    SE_5,                         SE_6,    SE_7,    SE_8,    SE_9,    SE_0,  KC_F12,
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-            KC_LSFT, ___X___, ___X___, ___X___, ___X___, ___X___,                      ___X___, ___X___, ___X___, ___X___, ___X___, ___X___,
+           ___X___, ___X___, ___X___, ___X___, ___X___, ___X___,                      ___X___, ___X___, ___X___, ___X___, ___X___, ___X___,
         //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------
                                                 _______, _______, _______,    _______, _______, _______
                                             //`--------------------------'  `--------------------------'
@@ -115,7 +119,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
             ___X___, ___X___, ___X___, ___X___, ___X___, _______,                      SE_MINS, SE_PLUS, SE_SLSH, SE_ASTR, SE_BSLS, ___X___,
         //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------
-            _______, _______, _______,       _______, _______, _______
+                                                _______, _______, _______,       _______, _______, _______
         ),
     [SYM_L] = LAYOUT_split_3x6_3(
         //,-----------------------------------------------------.                    ,-----------------------------------------------------.
@@ -141,7 +145,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         ),
     [NAV] = LAYOUT_split_3x6_3(
     //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-        ___X___, ___X___, ___X___, ___X___, ___X___, ___X___,                      ___X___,  KC_HOME , KC_UP  , KC_END   , ___X___ ,___X___ ,
+        ___X___, ___X___, ___X___, ___X___, ___X___, ___X___,                      ___X___,  KC_PGUP , KC_UP  , KC_PGDN   , ___X___ ,___X___ ,
     //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
         ___X___, _______, _______, _______, _______, ___X___,                      ___X___,  KC_LEFT , KC_DOWN, KC_RIGHT , ___X___ ,___X___ ,
     //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -150,36 +154,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                             _______, _______, _______,    _______, _______, _______
                                         //`--------------------------'  `--------------------------'
         ),
-    [MAG] = LAYOUT_split_3x6_3(
+    [MOUSE] = LAYOUT_split_3x6_3(
         //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-            ___X___, ___X___, M_TL   , M_TH   , M_TR   , ___X___,                     ___X___, ___X___, ___X___, ___X___, ___X___,___X___,
+        _______, _______, _______, _______, _______, _______,                          ___X___, KC_WH_D, KC_MS_U, KC_WH_U, ___X___,___X___ ,
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-            ___X___, ___X___, M_LH   , M_FULL , M_RH   , ___X___,                      ___X___, ___X___, ___X___, ___X___, ___X___,___X___,
+        _______, _______, _______, _______, _______, _______,                          KC_WH_R, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_L, ___X___ ,
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-            ___X___, ___X___, M_BL   , M_BH   , M_BR   , ___X___,                      ___X___, ___X___, ___X___, ___X___, ___X___,___X___,
+        _______, _______, _______, _______, _______, _______,                          ___X___, ___X___, ___X___, ___X___, ___X___, ___X___ ,
         //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------
-                                                _______, _______, _______,    _______, _______, _______
-                                            //`--------------------------'  `--------------------------'
-        ),
-    [GAME] = LAYOUT_split_3x6_3(
-        //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-LT(NUM, KC_ESC),    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,  KC_BSPC,
-        //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-     LSFT_T(KC_TAB),    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, SE_ACUT, RSFT_T(KC_ENTER),
-        //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-            SE_PLUS,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  SE_QUOT,
-        //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                            KC_LCTL, KC_LALT, LGUI_T(KC_SPC),    KC_RGUI, KC_RALT, TO(QWERTY)
-                                        //`--------------------------'  `--------------------------'
+                                             MO(QWERTY), TG(MOUSE), KC_MS_BTN1,    KC_MS_BTN1, KC_MS_BTN2, KC_MS_BTN3
+                                                //`--------------------------'  `--------------------------'
 )
 };
 
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+
     uint8_t left_shift_pressed = get_mods() & MOD_BIT(KC_LSFT);
     uint8_t right_shift_pressed = get_mods() & MOD_BIT(KC_RSFT);
     uint8_t shift_pressed = left_shift_pressed | right_shift_pressed;
     uint16_t shift_code = KC_LSFT;
+
     if (right_shift_pressed) {
         shift_code = KC_RSFT;
     }
@@ -247,3 +242,27 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     return true;
 }
+
+bool caps_word_press_user(uint16_t keycode) {
+    switch (keycode) {
+        // Keycodes that continue Caps Word, with shift applied.
+        case KC_A ... KC_Z:
+        case KC_MINS:
+            add_weak_mods(MOD_BIT(KC_LSFT));  // Apply shift to next key.
+            return true;
+            // Keycodes that continue Caps Word, without shifting.
+        case KC_1 ... KC_0:
+        case KC_BSPC:
+        case KC_DEL:
+        case KC_UNDS:
+        case SE_UNDS:
+            return true;
+
+        default:
+            return false;  // Deactivate Caps Word.
+    }
+}
+
+
+
+
