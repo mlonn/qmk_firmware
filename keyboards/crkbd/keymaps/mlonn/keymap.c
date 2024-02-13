@@ -68,12 +68,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 enum layers {
     QWERTY,
+    GAME,
     MOUSE,
     G_N,
     SYM_L,
     SYM_R,
     NUM,
-    NAV,
+    NAV
 };
 
 enum custom_keycodes {
@@ -98,7 +99,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                         N_ESC, N_TAB ,S_ENT,       S_SPC, KC_BSPC,  MO(G_N)
                                       //`--------------------------'  `-------------------------
   ),
-
+    [GAME] = LAYOUT_split_3x6_3(
+            //,-----------------------------------------------------.                    ,-----------------------------------------------------.
+            KC_ESC , SE_Q   , SE_W   , SE_E   , SE_R   , SE_T ,                      SE_Y   , SE_U   , SE_I   , SE_O   , SE_P   , SE_ARNG,
+            //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+            KC_LSFT, SE_A    , SE_S    , SE_D    , SE_F    , SE_G ,                      SE_H    , SE_J    , SE_K    , SE_L    , SE_ODIA   , SE_ADIA,
+            //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+            KC_LALT, SE_Z   , SE_X   , SE_C   , SE_V    , SE_B,                    SE_N   , SE_M    , COM    , DOT    , SLSH   , QUOT   ,
+            //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
+                                                KC_LGUI, KC_TAB ,KC_ENT,       KC_SPC, KC_BSPC,  MO(G_N)
+                                            //`--------------------------'  `-------------------------
+    ),
   [G_N] = LAYOUT_split_3x6_3(
         //,-----------------------------------------------------.                    ,-----------------------------------------------------
             ___X___,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                        KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,
@@ -107,17 +118,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
            ___X___, ___X___, ___X___, ___X___, ___X___, ___X___,                      ___X___, ___X___, ___X___, ___X___, ___X___, ___X___,
         //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------
-                                                _______, _______, _______,    _______, _______, _______
+                                            TG(GAME), _______, _______,    _______, _______, _______
                                             //`--------------------------'  `--------------------------'
   ),
-
     [SYM_R] = LAYOUT_split_3x6_3(
         //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-            ___X___, ___X___, ___X___, ___X___, ___X___, ___X___,                      SE_PIPE, SE_LABK, SE_RABK,   SE_AT, SE_PERC, ___X___,
+            ___X___, ___X___, ___X___, ___X___, KC_VOLU, ___X___,                      SE_PIPE, SE_LABK, SE_RABK,   SE_AT, SE_PERC, ___X___,
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-            ___X___, ___X___, ___X___, ___X___, ___X___, ___X___,                      SE_AMPR, SE_EXLM, SE_COLN,  SE_EQL, SE_QUES, ___X___,
+            ___X___, ___X___, KC_MPRV, KC_MNXT, KC_MPLY, KC_MUTE,                      SE_AMPR, SE_EXLM, SE_COLN,  SE_EQL, SE_QUES, ___X___,
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-            ___X___, ___X___, ___X___, ___X___, ___X___, _______,                      SE_MINS, SE_PLUS, SE_SLSH, SE_ASTR, SE_BSLS, ___X___,
+            ___X___, ___X___, ___X___, ___X___, KC_VOLD, _______,                      SE_MINS, SE_PLUS, SE_SLSH, SE_ASTR, SE_BSLS, ___X___,
         //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------
                                                 _______, _______, _______,       _______, _______, _______
         ),
@@ -164,7 +174,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------
                                              MO(QWERTY), TG(MOUSE), KC_MS_BTN1,    KC_MS_BTN1, KC_MS_BTN2, KC_MS_BTN3
                                                 //`--------------------------'  `--------------------------'
-)
+        )
 };
 
 
@@ -249,6 +259,10 @@ bool caps_word_press_user(uint16_t keycode) {
         case KC_A ... KC_Z:
         case KC_MINS:
             add_weak_mods(MOD_BIT(KC_LSFT));  // Apply shift to next key.
+            add_weak_mods(MOD_BIT(KC_LSFT));  // Apply shift to next key.
+            add_weak_mods(MOD_BIT(KC_LSFT));  // Apply shift to next key.
+            add_weak_mods(MOD_BIT(KC_LSFT));  // Apply shift to next key.
+            add_weak_mods(MOD_BIT(KC_LSFT));  // Apply shift to next key.
             return true;
             // Keycodes that continue Caps Word, without shifting.
         case KC_1 ... KC_0:
@@ -262,7 +276,3 @@ bool caps_word_press_user(uint16_t keycode) {
             return false;  // Deactivate Caps Word.
     }
 }
-
-
-
-
