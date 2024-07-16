@@ -9,8 +9,7 @@ it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 2 of the License, or
 (at your option) any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
+This program is distributed in the hope that it will be useful,e implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
@@ -24,17 +23,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /* Select hand configuration */
 
-//#define MASTER_LEFT
-// #define MASTER_RIGHT
+#define SPLIT_USB_DETECT
 #define EE_HANDS
-
 //#define QUICK_TAP_TERM 0
 //#define TAPPING_TERM 100
 
-
 #define LAYER_STATE_16BIT
 #define PERMISSIVE_HOLD
-#define TAPPING_FORCE_HOLD
+#define TAPPING_FORCE_HOLD      
 #define BOTH_SHIFTS_TURNS_ON_CAPS_WORD
-#define SWAP_HANDS_ENABLE
 #define TAPPING_TOGGLE 2

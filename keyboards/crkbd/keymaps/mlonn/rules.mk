@@ -1,13 +1,6 @@
 MOUSEKEY_ENABLE = yes    # Mouse keys
-RGBLIGHT_ENABLE = no    # Enable WS2812 RGB underlight.
-OLED_ENABLE     = no
-OLED_DRIVER     = SSD1306
-LTO_ENABLE      = yes
-BOOTLOADER = atmel-dfu
+SPLIT_KEYBOARD = yes
+#BOOTLOADER = atmel-dfu
 CAPS_WORD_ENABLE = yes
-
-
-
-
-
-
+SPLIT_KEYBOARD = yes
+OLED_ENABLEå = yes
